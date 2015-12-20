@@ -74,6 +74,12 @@ func main() {
 	})
 
 	addr := args["--addr"].(string)
+	if addr == ":8080" {
+		envPort := os.Getenv("PORT")
+		if envPort != "" {
+			addr = ":" + envPort
+		}
+	}
 	log.Println("starting server on", addr)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
