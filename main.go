@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/tj/docopt"
 )
@@ -48,27 +49,27 @@ func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		url := r.URL.Path[1:]
-		log.Println("url", url)
+		logger := log.New(os.Stderr, url+" ", log.LstdFlags)
 		gfycatURL := gfycatURL(url)
-		log.Println("gfycat url", gfycatURL)
+		logger.Println("gfycat url", gfycatURL)
 		resp, err := http.Get(gfycatURL)
 		if err != nil {
-			log.Println("error fetching gfycat response", err)
+			logger.Println("error fetching gfycat response", err)
 			http.Error(w, http.StatusText(http.StatusBadGateway), http.StatusBadGateway)
 			return
 		}
 		var gyfycatResponse GyfycatResponse
 		if err := json.NewDecoder(resp.Body).Decode(&gyfycatResponse); err != nil {
-			log.Println("error decoding gfycat response", err)
+			logger.Println("error decoding gfycat response", err)
 			http.Error(w, http.StatusText(http.StatusBadGateway), http.StatusBadGateway)
 			return
 		}
 		if gyfycatResponse.WebmURL == "" {
-			log.Println("no webmUrl returned")
+			logger.Println("no webmUrl returned")
 			http.Error(w, http.StatusText(http.StatusBadGateway), http.StatusBadGateway)
 			return
 		}
-		log.Println("redirecting to", gyfycatResponse.WebmURL)
+		logger.Println("redirecting to", gyfycatResponse.WebmURL)
 		http.Redirect(w, r, gyfycatResponse.WebmURL, http.StatusMovedPermanently)
 	})
 
