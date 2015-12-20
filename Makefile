@@ -1,6 +1,6 @@
 default: server
 
 server:
-	@godep go run cmd/gfycat/main.go
+	@godep go run cmd/gfyfy/main.go
 
 .PHONY: server

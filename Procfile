@@ -1,1 +1,1 @@
-web: gfycat
+web: gfyfy

@@ -7,16 +7,16 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/f2prateek/gfycat-server/Godeps/_workspace/src/github.com/tj/docopt"
+	"github.com/f2prateek/gfyfy/Godeps/_workspace/src/github.com/tj/docopt"
 )
 
 const (
-	usage = `Gfycat Server.
+	usage = `Gfyfy.
 
 Usage:
-  gfycat [--addr=<a>]
-  gfycat -h | --help
-  gfycat --version
+  gfyfy [--addr=<a>]
+  gfyfy -h | --help
+  gfyfy --version
 
 Options:
   -h --help      Show this screen.
