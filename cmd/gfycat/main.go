@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/tj/docopt"
+	"github.com/f2prateek/gfycat-server/Godeps/_workspace/src/github.com/tj/docopt"
 )
 
 const (
