@@ -45,8 +45,7 @@ func gfycatURL(url string) string {
 func serve(w http.ResponseWriter, r *http.Request) {
 	gifURL := r.URL.Path[1:]
 	if gifURL == "" {
-		w.WriteHeader(200)
-		fmt.Fprintln(w, http.StatusText(200))
+		http.ServeFile(w, r, "templates/index.html")
 		return
 	}
 	if gifURL == "favicon.ico" {
